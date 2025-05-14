@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sunny Travel - {{ title }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{% static 'app/styles.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <link rel="icon" href="{% static 'app/images/favicon.ico' %}">
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="{% static 'app/images/logo.png' %}" height="40" alt="Sunny Travel">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'tour_list' %}">Туры</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'resources' %}">Ресурсы</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'feedback' %}">Обратная связь</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'video' %}">Видео</a> <!-- Новая кнопка -->
+                    </li>
+                    {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin:app_tour_changelist' %}">Добавить тур</a> <!-- Для админа -->
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="d-flex">
+                {% if user.is_authenticated %}
+                <span class="navbar-text me-3">Добро пожаловать, {{ user.username }}!</span>
+                <form action="{% url 'logout' %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-light">Выйти</button>
+                </form>
+                {% else %}
+                <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Войти</a>
+                <a href="{% url 'registration' %}" class="btn btn-primary">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Основное содержимое -->
+    <main class="container my-5">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Подвал -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">© {% now 'Y' %} Sunny Travel. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container resources-page py-4">
+    <h1 class="text-center mb-5">Полезные ресурсы для путешественников</h1>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="resource-card text-center h-100 p-3 shadow-sm rounded">
+                <a href="https://www.tripadvisor.ru/" target="_blank" class="d-block mb-3">
+                    <img src="{% static 'app/images/resources/tripadvisor.png' %}"
+                         alt="TripAdvisor"
+                         class="img-fluid resource-logo">
+                </a>
+                <h3 class="h5">TripAdvisor</h3>
+                <p class="text-muted">Отзывы об отелях, ресторанах и достопримечательностях</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="resource-card text-center h-100 p-3 shadow-sm rounded">
+                <a href="https://www.booking.com/" target="_blank" class="d-block mb-3">
+                    <img src="{% static 'app/images/resources/booking.png' %}"
+                         alt="Booking.com"
+                         class="img-fluid resource-logo">
+                </a>
+                <h3 class="h5">Booking.com</h3>
+                <p class="text-muted">Бронирование отелей по всему миру</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="resource-card text-center h-100 p-3 shadow-sm rounded">
+                <a href="https://www.aviasales.ru" target="_blank" class="d-block mb-3">
+                    <img src="{% static 'app/images/resources/aviasales.png' %}"
+                         alt="Aviasales"
+                         class="img-fluid resource-logo">
+                </a>
+                <h3 class="h5">Авиасейлс</h3>
+                <p class="text-muted">Поиск дешевых авиабилетов</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Стили для логотипов ресурсов */
+    .resource-logo {
+        max-width: 180px;
+        height: auto;
+        transition: transform 0.3s ease;
+    }
+
+    .resource-card:hover .resource-logo {
+        transform: scale(1.05);
+    }
+
+    .resource-card {
+        border: 1px solid #eee;
+        transition: box-shadow 0.3s ease;
+    }
+
+        .resource-card:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+    /* Адаптация для мобильных */
+    @media (max-width: 768px) {
+        .resource-logo {
+            max-width: 120px;
+        }
+
+        .resource-card {
+            margin-bottom: 20px;
+        }
+    }
+</style>
+{% endblock %}

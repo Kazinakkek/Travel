@@ -1,0 +1,23 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Добавить новую статью</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label class="form-label">Заголовок</label>
+            {{ form.title }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Изображение</label>
+            {{ form.image }}
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Содержание</label>
+            {{ form.content }}
+        </div>
+        <button type="submit" class="btn btn-primary">Опубликовать</button>
+    </form>
+</div>
+{% endblock %}

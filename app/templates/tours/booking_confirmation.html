@@ -1,0 +1,31 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h2>Бронирование подтверждено!</h2>
+        </div>
+        <div class="card-body">
+            <h3>Детали бронирования #{{ booking.id }}</h3>
+            <ul class="list-group mb-4">
+                <li class="list-group-item"><strong>Тур:</strong> {{ booking.tour.title }}</li>
+                <li class="list-group-item"><strong>Даты:</strong> {{ booking.tour.departure_date|date:"d.m.Y" }} - {{ booking.tour.return_date|date:"d.m.Y" }}</li>
+                <li class="list-group-item"><strong>Количество человек:</strong> {{ booking.persons }}</li>
+                <li class="list-group-item"><strong>Дата бронирования:</strong> {{ booking.booking_date|date:"d.m.Y H:i" }}</li>
+                {% if booking.notes %}
+                <li class="list-group-item"><strong>Ваши пожелания:</strong> {{ booking.notes }}</li>
+                {% endif %}
+            </ul>
+
+            <div class="alert alert-info">
+                Мы свяжемся с вами в ближайшее время для подтверждения бронирования.
+            </div>
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="{% url 'tour_list' %}" class="btn btn-primary">Вернуться к списку туров</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

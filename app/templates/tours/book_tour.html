@@ -1,0 +1,32 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Бронирование тура: {{ tour.title }}</h2>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label class="form-label">Количество человек:</label>
+                            {{ form.persons }}
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Дополнительные пожелания:</label>
+                            {{ form.notes }}
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">Подтвердить бронирование</button>
+                            <a href="{% url 'tour_detail' tour.pk %}" class="btn btn-outline-secondary">Отмена</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

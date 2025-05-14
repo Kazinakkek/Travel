@@ -1,0 +1,46 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+
+    <h1 class="mb-4">Наши видео-туры</h1>
+
+    {% if videos %}
+    <div class="row">
+        {% for video in videos %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h3 class="card-title">{{ video.title }}</h3>
+                    <div class="ratio ratio-16x9 mb-3">
+                        <video controls class="rounded"
+                               {% if video.poster %}poster="{{ MEDIA_URL }}{{ video.poster }}" {% endif %}>
+                            <source src="{{ MEDIA_URL }}{{ video.file }}" type="video/mp4">
+                            Ваш браузер не поддерживает видео.
+                        </video>
+                    </div>
+
+                    <div class="video-info">
+                        <small class="text-muted">
+                            <i class="bi bi-download"></i>
+                            <a href="{{ MEDIA_URL }}{{ video.file }}" download>Скачать видео</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-warning">
+        Видео не найдены. Пожалуйста, проверьте:
+        <ul>
+            <li>Файлы должны быть в: {{ debug_info.videos_dir }}</li>
+            <li>Поддерживаемые форматы: .mp4</li>
+            <li>Превью: имя_файла_preview.jpg</li>
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

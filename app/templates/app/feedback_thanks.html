@@ -1,0 +1,27 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container thanks-container">
+    <h2>Спасибо за ваш отзыв, {{ data.name }}!</h2>
+    <p>Мы ценим ваше мнение и учтем ваши пожелания.</p>
+
+    <div class="feedback-summary">
+        <h3>Ваш отзыв:</h3>
+        <ul>
+            <li><strong>Email:</strong> {{ data.email }}</li>
+            <li><strong>Оценка:</strong> {{ data.rating }}</li>
+            <li>
+                <strong>Что улучшить:</strong>
+                {% for imp in data.improvements %}
+                {{ imp }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </li>
+            <li><strong>Частота посещений:</strong> {{ data.visit_frequency }}</li>
+            <li><strong>Ваши пожелания:</strong> {{ data.message }}</li>
+        </ul>
+    </div>
+
+    <a href="/" class="btn btn-primary">Вернуться на главную</a>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="my-4">Наши туры</h1>
+    <div class="row">
+        {% for tour in tours %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                {% if tour.image %}
+                <img src="{{ tour.image.url }}" class="card-img-top" alt="{{ tour.title }}" style="height: 200px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a href="{% url 'tour_detail' tour.pk %}" class="text-decoration-none">{{ tour.title }}</a>
+                    </h5>
+                    <p class="card-text">{{ tour.short_description }}</p>
+                </div>
+                <div class="card-footer bg-white">
+                    <small class="text-muted">{{ tour.departure_date }} - {{ tour.return_date }}</small>
+                    <span class="float-end fw-bold">{{ tour.price }} €</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

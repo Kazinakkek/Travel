@@ -1,0 +1,62 @@
+﻿{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container feedback-container">
+    <h2>Обратная связь</h2>
+    <p>Пожалуйста, оставьте ваш отзыв о нашем сайте</p>
+
+    <form method="post" class="feedback-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {% if form.name.errors %}
+            <div class="error">{{ form.name.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% if form.email.errors %}
+            <div class="error">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label>Общая оценка сайта:</label>
+            <div class="rating-options">
+                {{ form.rating }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Что можно улучшить?</label>
+            <div class="improvement-options">
+                {{ form.improvements }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            {{ form.visit_frequency.label_tag }}
+            {{ form.visit_frequency }}
+        </div>
+
+        <div class="form-group">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+            {% if form.message.errors %}
+            <div class="error">{{ form.message.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Отправить отзыв</button>
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'app/js/feedback.js' %}"></script>
+{% endblock %}
